@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="form-group">
+                <input type="text" class="form-control" 
+                        v-model="seleccion" 
+                        @input="change" 
+                        @keydown.down="down"
+                        @keydown.up="up"
+                        @keydown.enter="enter"
+                        >
+        
+                <ul v-if="mostrar">
+                    <li @click="click(index)" 
+                        :class="{'active':esActivo(index)}"
+                        v-for="(resultado,index) in resultados" 
+                        :key="resultado.id" >{{ resultado }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script type="text/javascript">
+        new Vue({
+            el:'#app',
+            data(){
+                return{
+                    seleccion:'',
+                    mostrar:false,
+                    actual:'',
+                    nombres:['Eddy','Carlos','Juan','Pedro','Ramiro','Ricardo','Javier','Maria','Silvia','Sandra']
+                }
+            },
+            computed:{
+                resultados(){
+                    let me=this
+                    //me.seleccion=''
+                    me.actual=''
+                    if(me.seleccion!='' /* && me.seleccion.length>2 */){
+                        return me.nombres.filter(elem=>{
+                            return elem.toLowerCase().includes(me.seleccion.toLowerCase());
+                        })
+                    }
+                },
+            },
+            methods:{
+                esActivo(index){
+                    let me=this
+                    //console.log('index',index,'actual',me.actual)
+                    //if()
+                    return index===me.actual;
+                },
+                up(){
+                    let me=this
+                    if(me.actual>0){
+                        me.actual--
+                        //console.log(me.actual)
+                    }
+                },
+                down(){
+                    let me=this
+                    if(me.actual<me.resultados.length-1){
+                        me.actual++
+                        //console.log(me.actual)
+                    }
+                },
+                enter(){
+                    //console.log('entra')
+                    let me=this
+                    //console.log(resultados[me.actual])
+                    console.log('enter-seleccionado:',me.resultados[me.actual])
+                    me.seleccion=me.resultados[me.actual]
+                    me.mostrar=false;
+                },
+                click(indice){
+                    let me=this
+                    console.log('click-seleccionado',me.resultados[indice])
+                    me.seleccion=me.resultados[indice]
+                    me.mostrar=false;
+                },
+                change(){
+                    let me=this
+                    if(!me.mostrar){
+                        me.mostrar=true
+                    }
+                },
+            },
+            mounted(){
+                console.log("montado")
+            }
+        })
+
+    </script>
+    <style>
+        .active{
+            background-color: darkseagreen;
+            /*text-decoration:underline;*/
+        }
+        li:hover {
+            cursor: pointer;
+            background-color: lightsteelblue;
+        }
+
+    </style>
+    
+</body>
+</html>
