@@ -12,13 +12,14 @@
     <div id="app">
         <div class="container">
             <div class="form-control col">
-                <movie-card
+                <movie-card></movie-card>
+                <!-- <movie-card
                 v-for="(movie, index) in movies"
                 :key="index"
                 :title="movie.title"
                 :image="movie.image"
                 >
-            </movie-card>
+            </movie-card> -->
 
             </div>
             <div class="form-group">
@@ -42,6 +43,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="app.js"></script>
+    <script src="movie-card.js"></script>
 
     <style>
         .active{
