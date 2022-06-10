@@ -8,16 +8,7 @@ new Vue({
             nombres:['Eddy','Carlos','Juan','Pedro','Ramiro','Ricardo','Javier','Maria','Silvia','Sandra'],
         }
     },
-    /* template:
-    `
-            <movie-card
-                v-for="(movie, index) in movies"
-                :key="index"
-                :title="movie.title"
-                :image="movie.image"
-                >
-            </movie-card>
-            }`, */
+    /*  */
     computed:{
         resultados(){
             let me=this
